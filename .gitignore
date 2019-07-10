@@ -1,0 +1,11 @@
+# MAC OS
+.DS_Store
+
+# Bundle
+bundle.js
+
+# node_modules
+node_modules/
+
+# environment variables
+.env
