@@ -28,6 +28,7 @@
     "@babel/register": "^7.4.4",
     "babel-loader": "^8.0.6",
     "babel-minify-webpack-plugin": "^0.3.1",
+    "bcryptjs": "^2.4.3",
     "chess-merida-font": "0.0.3",
     "compression-webpack-plugin": "^3.0.0",
     "cors": "^2.8.5",
