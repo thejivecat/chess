@@ -1,9 +1,7 @@
 
-const style = ``;
-
 const renderPage = function (callback) {
   const initialData = {};
-  callback({ style, initialData });
+  callback({ initialData });
 };
 
 export default renderPage;

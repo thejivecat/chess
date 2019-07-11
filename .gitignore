@@ -2,7 +2,10 @@
 .DS_Store
 
 # Bundle
-bundle.js
+main.bundle.js
+main.bundle.js.gz
+build/
+
 
 # node_modules
 node_modules/
