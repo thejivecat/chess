@@ -13,10 +13,16 @@ const CreateAccount = ({ location, redirectToReferrer, login }) => {
   }
 
   return (
-    <div>
-      <AuthNav />
-      <h1>Create new account</h1>
-      <button onClick={() => login()}>Create Account and Login</button>
+    <div className="light-blue">
+      <div className="row">
+        <div className="col s12">
+          <AuthNav />
+        </div>
+      </div>
+      <div className="col s6 offset-s3">
+        <h1>Create new account</h1>
+        <button onClick={() => login()}>Create Account and Login</button>
+      </div>
 
     </div>
   );

@@ -21,10 +21,12 @@ class App extends React.Component {
   render() {
 
     return (
-      <MainRouter
-        login={this.handleAuthentication}
-        redirectToReferrer={this.state.redirectToReferrer}
-      />
+      <div className="">
+        <MainRouter
+          login={this.handleAuthentication}
+          redirectToReferrer={this.state.redirectToReferrer}
+        />
+      </div>
     );
   }
 }

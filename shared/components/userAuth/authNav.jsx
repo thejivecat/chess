@@ -1,18 +1,21 @@
 import React from 'react';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const AuthNav = ({ }) => {
 
   return (
-    <ul>
-      <li>
-        <Link to='/'>Log in</Link>
-      </li>
-      <li>
-        <Link to='/create'>Create Account</Link>
-      </li>
-    </ul>
+    <nav className="light-blue">
+      <ul id="" className="right">
+        <i className="cm cm-w-queen brand-logo" aria-hidden="true"></i>
+        <li>
+          <Link to='/'>Log in</Link>
+        </li>
+        <li>
+          <Link to='/create'>Create Account</Link>
+        </li>
+      </ul>
+    </nav>
   );
 };
 

@@ -6,14 +6,40 @@ import CreateAccount from '../userAuth/createAccount.jsx';
 import ChessHome from '../chess/chessHome.jsx';
 import ErrorPage from './errorPage.jsx';
 
+import { renderRoutes } from 'react-router-config';
+import routes from './routes.jsx';
+
+
 const MainRouter = ({ login, redirectToReferrer }) => {
 
+  // return (
+  //   <Switch>
+  //     {renderRoutes(routes)}
+  //   </Switch>
+  // );
   return (
     <Switch>
-      <Route exact path='/' render={props => (<Login {...props} login={login} redirectToReferrer={redirectToReferrer} />)}></Route>
-      <Route exact path='/create' render={props => (<CreateAccount {...props} login={login} redirectToReferrer={redirectToReferrer} />)}></Route>
-      <PrivateRoute path='/chess' component={ChessHome} isAuthenticated={redirectToReferrer} />
-      <Route component={ErrorPage}></Route>
+      <Route
+        exact
+        path='/'
+        render={props => (<Login {...props} login={login} redirectToReferrer={redirectToReferrer} />)}
+      >
+      </Route>
+      <Route
+        exact
+        path='/create'
+        render={props => (<CreateAccount {...props} login={login} redirectToReferrer={redirectToReferrer} />)}
+      >
+      </Route>
+      <PrivateRoute
+        path='/chess'
+        component={ChessHome}
+        isAuthenticated={redirectToReferrer}
+      />
+      <Route
+        component={ErrorPage}
+      >
+      </Route>
     </Switch>
   );
 };

@@ -4,9 +4,11 @@
   "description": "basic player versus player chess app",
   "main": "server.js",
   "scripts": {
-    "start": "webpack; node server/server.js",
-    "start:dev": "nodemon server/server.js",
-    "build:dev": "webpack -d --watch",
+    "start": "webpack; node server/run.js",
+    "start:dev": "nodemon server/run.js",
+    "build": "webpack; rm build/main.bundle.js;",
+    "watch": "webpack --watch",
+    "dev": "webpack-dev-server --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,13 +25,30 @@
     "@babel/core": "^7.5.4",
     "@babel/preset-env": "^7.5.4",
     "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.4.4",
     "babel-loader": "^8.0.6",
+    "babel-minify-webpack-plugin": "^0.3.1",
+    "chess-merida-font": "0.0.3",
+    "compression-webpack-plugin": "^3.0.0",
+    "cors": "^2.8.5",
+    "css-loader": "^3.0.0",
     "dotenv": "^8.0.0",
+    "dynamic-cdn-webpack-plugin": "^4.0.0",
     "express": "^4.17.1",
+    "html-webpack-plugin": "^3.2.0",
+    "isomorphic-fetch": "^2.2.1",
+    "isomorphic-style-loader": "^5.1.0",
+    "module-to-cdn": "^3.1.5",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-router-config": "^5.0.1",
     "react-router-dom": "^5.0.1",
+    "uglifyjs-webpack-plugin": "^2.1.3",
     "webpack": "^4.35.3",
-    "webpack-cli": "^3.3.5"
+    "webpack-cli": "^3.3.5",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.7.2"
   }
 }
