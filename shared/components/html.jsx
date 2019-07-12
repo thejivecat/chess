@@ -6,6 +6,7 @@ const Html = (props) => (
       <title>Chess App</title>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     </head>
     <body>
       <div id="app">{props.children}</div>

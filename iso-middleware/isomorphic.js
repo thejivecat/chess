@@ -7,11 +7,12 @@ import Html from '../shared/components/html.jsx';
 import App from '../shared/components/app.jsx';
 
 export default function isomorphicMiddleware(req, res) {
+  const { url } = res.locals;
   renderPage(({ initialData }) => {
     ReactDOMServer.renderToNodeStream(
       <Html initialData={JSON.stringify(initialData)}>
         <Router history={history}>
-          <App {...initialData} name="Chess" />
+          <App {...initialData} url={url} name="Chess" />
         </Router>
       </Html>
     ).pipe(res);
