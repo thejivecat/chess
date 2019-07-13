@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs');
 
 const isPasswordStrong = password => {
   if (!(/[A-Z]/).test(password)) {
@@ -22,34 +23,28 @@ const validatePasswords = (one, two) => {
 // TODO
 const validateEmail = email => null;
 
-const validateNewUserCredentials = ({ password, password2, name, email }) => {
-  const passwordsError = validatePasswords(password, password2);
+const validateNewUserInput = ({ password, password2, name, email }) => {
+  const passwordError = validatePasswords(password, password2);
   const nameError = name.length < 6 ? 'user name must be at least 6 characters long' : null;
   const emailError = validateEmail(email);
-  const error = passwordsError || nameError || emailError;
+  const errors = { passwordError, nameError, emailError };
 
-  return new Promise((resolve, reject) => {
-    if (!error) resolve(true);
-    else reject(error);
-  })
+  return {
+    errors,
+    isValid: Object.keys(errors).every(key => !errors[key])
+  }
 };
 
-const createNewUser = (user) => {
-  return validateNewUserCredentials(user)
-    .then(() => true)
-    // TODO
-    // db look if email or name exist
-    // if they dont create new user
-    .catch((error) => error);
-};
+const validateExistingUserInput = ({ email, password }) => {
+  const errors = { passwordError: password === '', emailError: email === '' };
 
-const validateExistingUser = (email, password) => {
-  // TODO
-  // database lookup
-  return new Promise((resolve, reject) => resolve(true));
+  return {
+    errors,
+    isValid: Object.keys(errors).every(key => !errors[key])
+  }
 };
 
 module.exports = {
-  createNewUser,
-  validateExistingUser,
+  validateNewUserInput,
+  validateExistingUserInput,
 };

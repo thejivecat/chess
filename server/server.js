@@ -3,7 +3,9 @@
 import dotenv from 'dotenv';
 import http from 'http';
 import express from 'express';
+import bodyParser from 'body-parser';
 import cors from 'cors';
+import helmet from 'helmet';
 import path from 'path';
 import socketManager from './socketManager.js';
 import isomorphicMiddleware from '../iso-middleware/isomorphic.js';
@@ -22,6 +24,9 @@ const port = process.env.PORT || 8080;
 
 // MIDDLEWARE
 //
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(helmet());
 app.use(cors());
 
 
@@ -40,6 +45,7 @@ const buildPath = path.join(__dirname, '../', 'build');
 app.use('/dynamic', express.static(buildPath));
 app.use(express.static(__dirname));
 
+
 // SET URL
 //
 app.use((req, res, next) => {
@@ -54,7 +60,7 @@ app.use(isomorphicMiddleware);
 
 // SOCKET.io
 //
-io.on('connection', socketManager);
+// io.on('connection', socketManager);
 
 
 // SERVE
