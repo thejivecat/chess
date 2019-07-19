@@ -13,10 +13,10 @@ module.exports = {
       password: 'student'
     },
     migrations: {
-      path: MIGRATIONS
+      directory: MIGRATIONS
     },
     seeds: {
-      path: SEED
+      directory: SEED
     }
   },
 
@@ -33,10 +33,10 @@ module.exports = {
     },
     migrations: {
       tableName: 'knex_migrations',
-      path: MIGRATIONS
+      directory: MIGRATIONS
     },
     seeds: {
-      path: SEED
+      directory: SEED
     }
   },
 
@@ -53,10 +53,10 @@ module.exports = {
     },
     migrations: {
       tableName: 'knex_migrations',
-      path: MIGRATIONS
+      directory: MIGRATIONS
     },
     seeds: {
-      path: SEED
+      directory: SEED
     }
   }
 

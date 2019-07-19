@@ -4,11 +4,15 @@ import dotenv from 'dotenv';
 import http from 'http';
 import express from 'express';
 import bodyParser from 'body-parser';
+import passport from 'passport';
 import cors from 'cors';
-import helmet from 'helmet';
 import path from 'path';
+// socket.io
 import socketManager from './socketManager.js';
+// serverside rendering function
 import isomorphicMiddleware from '../iso-middleware/isomorphic.js';
+// auth routes
+import usersRouter from './routes/api/users.js';
 
 const socketIo = require('socket.io');
 
@@ -24,9 +28,11 @@ const port = process.env.PORT || 8080;
 
 // MIDDLEWARE
 //
+app.use(passport.initialize());
+//passport config
+require('../config/passport.js')(passport);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(helmet());
 app.use(cors());
 
 
@@ -57,6 +63,10 @@ app.use((req, res, next) => {
 //
 app.use(isomorphicMiddleware);
 
+
+// ROUTES
+//
+app.use('/api/users', usersRouter);
 
 // SOCKET.io
 //

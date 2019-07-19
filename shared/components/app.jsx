@@ -15,7 +15,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      isLoading: true,
+      isLoading: false,
       redirectToReferrer: false,
       socket: null,
       user: null
@@ -73,11 +73,26 @@ class App extends React.Component {
     });
   }
 
-  handleAuthentication() {
-    this.setState({
-      redirectToReferrer: true,
-      isLoading: true,
-    })
+  handleAuthentication(user) {
+    console.log(user, 'user')
+    if (users.password2) {
+      fetch(`${window.location.host}/api/users/create`, {
+        method: 'POST',
+        body: JSON.stringify(user),
+        headers: {
+          'content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(error => console.log(error));
+
+    }
+    // this.setState({
+    //   redirectToReferrer: true,
+    //   isLoading: true,
+    // })
   }
 
   render() {
@@ -85,12 +100,12 @@ class App extends React.Component {
     // 
     // LOADER ANIMATION DISPLAYS FOR ONE SECOND ON PAGE LOAD
     // 
-    if (this.state.isLoading) {
-      setTimeout(() => this.setIsLoading(false), 1000);
-      return (
-        <Loader />
-      );
-    }
+    // if (this.state.isLoading) {
+    //   setTimeout(() => this.setIsLoading(false), 1000);
+    //   return (
+    //     <Loader />
+    //   );
+    // }
 
 
     return (

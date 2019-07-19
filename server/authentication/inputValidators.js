@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const validator = require('validator');
 
 const isPasswordStrong = password => {
   if (!(/[A-Z]/).test(password)) {
@@ -21,7 +22,7 @@ const validatePasswords = (one, two) => {
 };
 
 // TODO
-const validateEmail = email => null;
+const validateEmail = email => validator.isEmail(email) ? null : 'email must be actual email';
 
 const validateNewUserInput = ({ password, password2, name, email }) => {
   const passwordError = validatePasswords(password, password2);
@@ -36,7 +37,7 @@ const validateNewUserInput = ({ password, password2, name, email }) => {
 };
 
 const validateExistingUserInput = ({ email, password }) => {
-  const errors = { passwordError: password === '', emailError: email === '' };
+  const errors = { passwordError: isPasswordStrong(password), emailError: validateEmail(email) };
 
   return {
     errors,

@@ -5,7 +5,7 @@ exports.up = function (knex) {
       table.string('name')
       table.string('email')
       table.string('password')
-      table.date('date').defaultTo(Date(Date.now()))
+      table.date('date').defaultTo(new Date(Date.now()).toLocaleDateString('en-US', { month: 'numeric', day: 'numeric', year: 'numeric' }))
     }),
   ]);
 };
