@@ -1,5 +1,6 @@
 // IMPORTS
 //
+import "regenerator-runtime/runtime";
 import dotenv from 'dotenv';
 import http from 'http';
 import express from 'express';
@@ -12,7 +13,9 @@ import socketManager from './socketManager.js';
 // serverside rendering function
 import isomorphicMiddleware from '../iso-middleware/isomorphic.js';
 // auth routes
-import usersRouter from './routes/api/users.js';
+import authRoutes from './routes/auth.js';
+// error handler
+import errorHandler from './handlers/errorHandler.js';
 
 const socketIo = require('socket.io');
 
@@ -28,10 +31,10 @@ const port = process.env.PORT || 8080;
 
 // MIDDLEWARE
 //
-app.use(passport.initialize());
-//passport config
-require('../config/passport.js')(passport);
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(passport.initialize());
+// //passport config
+// require('../config/passport.js')(passport);
+// app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -47,30 +50,42 @@ app.use(cors());
 
 // SERVE BUNDLE
 //
-const buildPath = path.join(__dirname, '../', 'build');
-app.use('/dynamic', express.static(buildPath));
-app.use(express.static(__dirname));
+// const buildPath = path.join(__dirname, '../', 'build');
+// app.use('/dynamic', express.static(buildPath));
+// app.use(express.static(__dirname));
 
 
 // SET URL
 //
-app.use((req, res, next) => {
-  res.locals.url = `${process.env.HOST}:${process.env.PORT}` || 'localhost:3000';
-  next();
-})
+// app.use((req, res, next) => {
+//   res.locals.url = `${process.env.HOST}:${process.env.PORT}` || 'localhost:3000';
+//   next();
+// })
 
 // INDEX ROUTE
 //
-app.use(isomorphicMiddleware);
+// app.use(isomorphicMiddleware);
 
 
 // ROUTES
 //
-app.use('/api/users', usersRouter);
+app.use('/api/auth', authRoutes);
+
 
 // SOCKET.io
 //
 // io.on('connection', socketManager);
+
+
+// ERRORS
+//
+app.use((req, res, next) => {
+  let error = new Error('Not Found');
+  error.status = 404;
+  next(error);
+});
+
+app.use(errorHandler);
 
 
 // SERVE
